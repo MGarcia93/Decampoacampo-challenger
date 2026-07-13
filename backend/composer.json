@@ -12,10 +12,16 @@
         }
     ],
     "require": {
-        "php": "^8.3"
+        "php": "^8.5"
     },    
     "config": {
         "optimize-autoloader": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^4.7"
     }
 }
