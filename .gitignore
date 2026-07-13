@@ -1,0 +1,10 @@
+# Variables de entorno
+.env
+.env.*
+!.env.example
+
+backend/.env
+frontend/.env
+
+# Dependencias
+backend/vendor/

@@ -1,0 +1,21 @@
+{
+    "name": "maximiliano/decampoacampo-backend",
+    "description": "challenger para posicion en decampoacampo",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Garcia Maximiliano"
+        }
+    ],
+    "require": {
+        "php": "^8.3"
+    },    
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}
