@@ -1,159 +1,118 @@
 # Challenge PHP — Gestión de Productos
 
-Challenger para Decampoacampo
+## Stack
 
-## Estructura general
+* PHP 8.5 nativo
+* PHP-FPM + Nginx
+* MySQL 8.4
+* PDO
+* Composer para autoload PSR-4
+* Pest para tests
 
-```text
-challenge/
-├── backend/
-│   ├── database/
-│   │   └── migrations/
-│   ├── docker/
-│   │   └── nginx/
-│   ├── public/
-│   │   └── index.php
-│   ├── src/
-│   ├── .env.example
-│   ├── composer.json
-│   └── Dockerfile
-├── frontend/
-├── docker-compose.yml
-├── .env.example
-├── .gitignore
-└── README.md
-```
-
-## Requisitos
-
-Para ejecutar el proyecto es necesario tener instalado:
-
-* Docker
-* Docker Compose
-
-## Configuración inicial
-
-### 1. Crear el archivo de entorno principal
-
-Desde la raíz del proyecto:
+## Configuración
 
 ```bash
 cp .env.example .env
-```
-
-Este archivo contiene la configuración utilizada por Docker Compose, como el puerto expuesto de MySQL y las credenciales iniciales de la base de datos.
-
-### 2. Crear el archivo de entorno del backend
-
-```bash
 cp backend/.env.example backend/.env
 ```
 
-Ejemplo de `backend/.env`:
-
-```env
-APP_ENV=local
-APP_DEBUG=true
-
-DB_HOST=mysql
-DB_PORT=3306
-DB_DATABASE=challenge
-DB_USERNAME=challenge
-DB_PASSWORD=challenge
-
-PRECIO_USD=1000
-```
-
-Dentro de la red de Docker, el host de la base de datos es el nombre del servicio:
-
-```text
-mysql
-```
-
-No debe utilizarse `localhost` para conectar el contenedor PHP con MySQL.
-
-`PRECIO_USD` representa el valor en pesos argentinos de un dólar y se utiliza para calcular el precio convertido de cada producto.
-
-## Levantar el entorno
-
-Construir las imágenes e iniciar los contenedores:
+## Instalación
 
 ```bash
 docker compose up -d --build
-```
-
-Instalar las dependencias de Composer dentro del contenedor PHP:
-
-```bash
 docker compose run --rm backend-php composer install
 ```
 
-Composer solamente instala y genera el autoload PSR-4 utilizado por la aplicación.
+## Base de datos
 
-Al crear por primera vez el volumen de MySQL, Docker ejecuta automáticamente la migración de esquema y el seed inicial desde `backend/database`.
+La base de datos se inicializa automáticamente desde:
 
-
-## Backend
-
-El backend utiliza:
-
-* PHP 8.5
-* PHP-FPM
-
-## Comandos útiles
-
-Ver el estado de los contenedores:
-
-```bash
-docker compose ps
+```text
+backend/database/migrations/
+backend/database/seeders/
 ```
 
-Ver los logs:
-
-```bash
-docker compose logs -f
-```
-
-Ver únicamente los logs del backend PHP:
-
-```bash
-docker compose logs -f backend-php
-```
-
-Acceder al contenedor PHP:
-
-```bash
-docker compose exec backend-php sh
-```
-
-Regenerar el autoload de Composer:
-
-```bash
-docker compose run --rm backend-php composer dump-autoload
-```
-
-## Apagar el entorno
-
-Detener y eliminar los contenedores:
-
-```bash
-docker compose down
-```
-
-Detener los contenedores y eliminar también el volumen persistente de MySQL:
+Para reiniciar los datos:
 
 ```bash
 docker compose down -v
+docker compose up -d --build
 ```
 
-El segundo comando elimina todos los datos almacenados en la base de datos local.
+## API
 
-Al volver a ejecutar `docker compose up -d --build`, MySQL inicializará nuevamente el esquema y los datos de ejemplo.
+Base URL:
+
+```text
+http://localhost:8080
+```
+
+Endpoints:
+
+```text
+GET    /productos
+GET    /productos/{id}
+POST   /productos
+PUT    /productos/{id}
+DELETE /productos/{id}
+```
+
+## Payload
+
+Payload utilizado para crear y actualizar productos:
+
+```json
+{
+  "nombre": "Yerba mate",
+  "descripcion": "Yerba mate orgánica",
+  "precio": 3500
+}
+```
+
+## Respuesta
+
+```json
+{
+  "data": {
+    "id": 1,
+    "nombre": "Yerba mate",
+    "descripcion": "Yerba mate orgánica",
+    "precio": 3500,
+    "precio_usd": 3.5,
+    "created_at": "2026-07-14 18:00:00",
+    "updated_at": "2026-07-14 18:00:00"
+  }
+}
+```
+
+Ejemplo de error:
+
+```json
+{
+  "error": "El nombre del producto es obligatorio",
+  "code": 422
+}
+```
 
 ## Tests
-
-El proyecto utiliza Pest como herramienta de testing para el backend.
 
 ```bash
 docker compose run --rm backend-php composer test
 ```
+
+Los tests se encuentran organizados en:
+
+```text
+backend/tests/Unit/
+backend/tests/Feature/
+```
+
+## Arquitectura
+
+El backend sigue una organización MVC pragmática:
+
+```text
+Route → Controller → Service → Repository → MySQL
+```
+
+La conversión a dólares se realiza en la capa de aplicación utilizando la variable `PRECIO_USD`.
