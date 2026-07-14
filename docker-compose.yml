@@ -37,6 +37,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./backend/database/migrations/create.sql:/docker-entrypoint-initdb.d/01-create.sql:ro
+      - ./backend/database/seeders/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql:ro
     healthcheck:
       test:
         [
