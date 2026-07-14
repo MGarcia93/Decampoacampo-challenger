@@ -6,6 +6,11 @@
             "App\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Garcia Maximiliano"
@@ -22,6 +27,10 @@
         }
     },
     "require-dev": {
+        "mockery/mockery": "^1.6",
         "pestphp/pest": "^4.7"
+    },
+    "scripts": {
+        "test": "pest --ci"
     }
 }
