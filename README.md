@@ -90,6 +90,8 @@ docker compose run --rm backend-php composer install
 
 Composer solamente instala y genera el autoload PSR-4 utilizado por la aplicación.
 
+Al crear por primera vez el volumen de MySQL, Docker ejecuta automáticamente la migración de esquema y el seed inicial desde `backend/database`.
+
 
 ## Backend
 
@@ -146,12 +148,12 @@ docker compose down -v
 
 El segundo comando elimina todos los datos almacenados en la base de datos local.
 
-Lo que te falta ahora, si vas a usar Pest, es agregar una sección de Testing. Podés sumar algo así:
+Al volver a ejecutar `docker compose up -d --build`, MySQL inicializará nuevamente el esquema y los datos de ejemplo.
 
 ## Tests
 
 El proyecto utiliza Pest como herramienta de testing para el backend.
 
 ```bash
-
 docker compose run --rm backend-php composer test
+```
