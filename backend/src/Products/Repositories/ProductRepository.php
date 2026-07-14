@@ -1,5 +1,6 @@
 <?php
 namespace App\Products\Repositories;
+use App\Products\Dtos\ProductCreateRequestDto;
 use App\Products\Models\Product;
 use App\Products\Repositories\Contracts\ProductRepositoryInterface;
 use App\Shared\Database\Connection;
@@ -24,15 +25,23 @@ class ProductRepository implements ProductRepositoryInterface
         $result = $this->connection->executeQuery($query, ['id' => $id]);
         return $result ? new Product(...$result[0]) : null;
     }
-    public function create(array $data): ?Product
+    public function create(ProductCreateRequestDto $data): ?Product
     {
         $query = "INSERT INTO productos (nombre, descripcion, precio) VALUES (:nombre, :descripcion, :precio)";
-        $result = $this->connection->executeStatement($query, $data);
+        $result = $this->connection->executeStatement($query, (array) $data);
         if (!$result) {
             return null;
         }
-        $data['id'] = (int) $this->connection->getConnection()->lastInsertId();
-        return new Product(...$data);
+        $dataArray = (array) $data;
+        $dataArray['id'] = (int) $this->connection->getConnection()->lastInsertId();
+        return new Product(
+            (int) $dataArray['id'],
+            $dataArray['nombre'],
+            $dataArray['descripcion'],
+            $dataArray['precio'],
+            date('Y-m-d H:i:s'),
+            date('Y-m-d H:i:s'),
+        );
     }
     public function update(int $id, array $data): bool
     {

@@ -1,8 +1,9 @@
 <?php
 namespace App\Products\Controllers;
+use App\Products\Dtos\ProductCreateRequestDto;
+use App\Products\Services\Contracts\ProductCreateInterface;
 use App\Products\Services\Contracts\ProductGetAllInterface;
 use App\Products\Services\Contracts\ProductShowInterface;
-use App\Shared\Exceptions\ValidateException;
 use App\Shared\Http\Request;
 use App\Shared\Http\Response;
 class ProductController
@@ -22,5 +23,18 @@ class ProductController
         $product = $productShow->execute($id);
 
         return Response::json(['data' => $product]);
+    }
+
+    public function create(Request $request, ProductCreateInterface $productCreate): Response
+    {
+
+        $data = $request->getParameters();
+
+        $productRequestDto = ProductCreateRequestDto::fromArray((array)$data);
+
+        $productResponseDto = $productCreate->execute($productRequestDto);
+
+        return Response::json(['data' => $productResponseDto], 201);
+
     }
 }
