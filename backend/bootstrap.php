@@ -2,6 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 use App\Shared\Exceptions\HttpException;
+use App\Shared\Http\Response;
 use App\Shared\Routing\Router;
 use App\Shared\Container\Container;
 class App
@@ -44,8 +45,8 @@ class App
     }
     public function error(string $message, int $statusCode = 500): void
     {
-        http_response_code($statusCode);
-        echo $message;
+        Response::json(['error' => $message, 'code' => $statusCode], $statusCode)->send();
+        
         die();
     }
 }
