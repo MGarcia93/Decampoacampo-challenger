@@ -37,6 +37,15 @@ final readonly class Response
             contentType: 'text/plain; charset=utf-8'
         );
     }
+    public static function noContent(
+        int $statusCode = 204
+    ): self {
+        return new self(
+            content: '',
+            statusCode: $statusCode,
+            contentType: 'text/plain; charset=utf-8'
+        );  
+    }
 
     public function send(): void
     {

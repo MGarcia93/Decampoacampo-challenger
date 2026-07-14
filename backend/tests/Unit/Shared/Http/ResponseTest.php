@@ -56,6 +56,20 @@ describe('Response::text()', function () {
 });
 
 
+describe('Response::noContent()', function () {
+    it('sets content with default status 204 and content type', function () {
+        $response = Response::noContent();
+
+        expect($response->content)->toBe('');
+        expect($response->statusCode)->toBe(204);
+        expect($response->contentType)->toBe('text/plain; charset=utf-8');
+    });
+
+   
+});
+
+
+
 
 
 describe('Response::send()', function () {
