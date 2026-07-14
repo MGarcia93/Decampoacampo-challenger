@@ -10,6 +10,6 @@ class ConvertPriceToDolar implements ConvertPriceInterface{
         $this->precio_usd=(float)getenv('PRECIO_USD');
     }
     public function convert(float $price): float{
-        return  $price / $this->precio_usd;
+        return  round($price / $this->precio_usd, 2);
     }
 }
