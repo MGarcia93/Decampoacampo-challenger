@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use App\Shared\Database\Connection;
-use PDO;
 
 it('returns the same Connection instance', function (): void {
     $first = Connection::getInstance();

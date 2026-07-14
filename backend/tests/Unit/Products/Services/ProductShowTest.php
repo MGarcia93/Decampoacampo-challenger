@@ -8,7 +8,6 @@ use App\Products\Repositories\Contracts\ProductRepositoryInterface;
 use App\Products\Services\ProductShow;
 use App\Shared\Convert\Contracts\ConvertPriceInterface;
 use App\Shared\Exceptions\NotFoundException;
-use Mockery;
 
 afterEach(function (): void {
     Mockery::close();

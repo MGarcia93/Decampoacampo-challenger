@@ -9,7 +9,6 @@ use App\Products\Repositories\Contracts\ProductRepositoryInterface;
 use App\Products\Services\ProductCreate;
 use App\Shared\Convert\Contracts\ConvertPriceInterface;
 use App\Shared\Exceptions\BadRequestException;
-use Mockery;
 
 afterEach(function (): void {
     Mockery::close();

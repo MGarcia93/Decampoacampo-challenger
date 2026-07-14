@@ -10,8 +10,6 @@ use App\Products\Services\ProductUpdate;
 use App\Shared\Convert\Contracts\ConvertPriceInterface;
 use App\Shared\Exceptions\BadRequestException;
 use App\Shared\Exceptions\NotFoundException;
-use Mockery;
-
 afterEach(function (): void {
     Mockery::close();
 });
