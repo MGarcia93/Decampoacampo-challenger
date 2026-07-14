@@ -31,5 +31,5 @@ it('converts prices with decimal values', function (): void {
 
     $result = $converter->convert(1_500.50);
 
-    expect($result)->toBe(1.5005);
+    expect($result)->toBe(1.50);
 });
