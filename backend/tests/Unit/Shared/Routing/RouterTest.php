@@ -68,7 +68,7 @@ describe('Router', function () {
 
         expect($result)->not->toBeNull();
         expect($result->parameters)->toHaveKey('id');
-        expect($result->parameters['id'])->toBe('42');
+        expect($result->parameters->id)->toBe('42');
         expect($result->method)->toBe(MethodEnum::GET);
         expect($result->controller)->toBe('FakeController');
         expect($result->action)->toBe('show');
@@ -82,9 +82,9 @@ describe('Router', function () {
 
         expect($result)->not->toBeNull();
         expect($result->parameters)->toHaveKey('userId');
-        expect($result->parameters['userId'])->toBe('5');
+        expect($result->parameters->userId)->toBe('5');
         expect($result->parameters)->toHaveKey('postId');
-        expect($result->parameters['postId'])->toBe('9');
+        expect($result->parameters->postId)->toBe('9');
     });
 
     it('returns null when no route matches the path', function () {
