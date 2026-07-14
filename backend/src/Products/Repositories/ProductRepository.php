@@ -28,7 +28,11 @@ class ProductRepository implements ProductRepositoryInterface
     public function create(ProductCreateRequestDto $data): ?Product
     {
         $query = "INSERT INTO productos (nombre, descripcion, precio) VALUES (:nombre, :descripcion, :precio)";
-        $result = $this->connection->executeStatement($query, (array) $data);
+        $result = $this->connection->executeStatement($query, [
+            'nombre' => $data->nombre,
+            'descripcion' => $data->descripcion,
+            'precio' => $data->precio
+        ]);
         if (!$result) {
             return null;
         }
@@ -37,8 +41,8 @@ class ProductRepository implements ProductRepositoryInterface
         return new Product(
             (int) $dataArray['id'],
             $dataArray['nombre'],
-            $dataArray['descripcion'],
             $dataArray['precio'],
+            $dataArray['descripcion'],
             date('Y-m-d H:i:s'),
             date('Y-m-d H:i:s'),
         );
