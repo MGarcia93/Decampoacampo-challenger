@@ -1,6 +1,7 @@
 <?php
 namespace App\Products\Controllers;
 use App\Products\Services\Contracts\ProductGetAllInterface;
+use App\Products\Services\Contracts\ProductShowInterface;
 use App\Shared\Exceptions\ValidateException;
 use App\Shared\Http\Request;
 use App\Shared\Http\Response;
@@ -16,13 +17,10 @@ class ProductController
         ]);
     }
 
-    public function show(Request $request, array $params): Response
+    public function show(int $id, ProductShowInterface $productShow): Response
     {
-        $productId = (int) $params['id'];
+        $product = $productShow->execute($id);
 
-        // Aquí iría la lógica para obtener un producto específico desde la base de datos
-        $product = ['id' => $productId, 'name' => "Producto {$productId}", 'price' => 10.99];
-
-        return Response::json($product);
+        return Response::json(['data' => $product]);
     }
 }
