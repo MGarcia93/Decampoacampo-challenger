@@ -2,6 +2,7 @@
 namespace App\Products\Controllers;
 use App\Products\Dtos\ProductCreateRequestDto;
 use App\Products\Services\Contracts\ProductCreateInterface;
+use App\Products\Services\Contracts\ProductDeleteInterface;
 use App\Products\Services\Contracts\ProductGetAllInterface;
 use App\Products\Services\Contracts\ProductShowInterface;
 use App\Products\Services\Contracts\ProductUpdateInterface;
@@ -48,6 +49,15 @@ class ProductController
         $productResponseDto = $productUpdate->execute($id, $productRequestDto);
 
         return Response::json(['data' => $productResponseDto], 200);
+
+    }
+    public function delete(int $id, ProductDeleteInterface $productDelete): Response
+    {
+
+
+        $productDelete->execute($id);
+
+        return Response::noContent();
 
     }
 }

@@ -4,10 +4,12 @@ namespace App\Shared\Container;
 use App\Products\Repositories\Contracts\ProductRepositoryInterface;
 use App\Products\Repositories\ProductRepository;
 use App\Products\Services\Contracts\ProductCreateInterface;
+use App\Products\Services\Contracts\ProductDeleteInterface;
 use App\Products\Services\Contracts\ProductGetAllInterface;
 use App\Products\Services\Contracts\ProductShowInterface;
 use App\Products\Services\Contracts\ProductUpdateInterface;
 use App\Products\Services\ProductCreate;
+use App\Products\Services\ProductDelete;
 use App\Products\Services\ProductGetAll;
 use App\Products\Services\ProductShow;
 use App\Products\Services\ProductUpdate;
@@ -20,6 +22,7 @@ final class Provider{
       ProductShowInterface::class=> ProductShow::class,
       ProductCreateInterface::class=> ProductCreate::class,
       ProductUpdateInterface::class=> ProductUpdate::class,
+      ProductDeleteInterface::class=> ProductDelete::class,
       ProductRepositoryInterface::class=> ProductRepository::class,
       ConvertPriceInterface::class=> ConvertPriceToDolar::class,
       
