@@ -43,11 +43,15 @@ class ProductRepository implements ProductRepositoryInterface
             date('Y-m-d H:i:s'),
         );
     }
-    public function update(int $id, array $data): bool
+    public function update(int $id, ProductCreateRequestDto $data): bool
     {
         $query = "UPDATE productos SET nombre = :nombre, descripcion = :descripcion, precio = :precio WHERE id = :id";
-        $data['id'] = $id;
-        $result = $this->connection->executeStatement($query, $data);
+        $result = $this->connection->executeStatement($query, [
+            'nombre' => $data->nombre,
+            'descripcion' => $data->descripcion,
+            'precio' => $data->precio,
+            'id' => $id
+        ]);
         return $result > 0;
     }
     public function delete(int $id): bool

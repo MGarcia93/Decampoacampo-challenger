@@ -4,6 +4,7 @@ use App\Products\Dtos\ProductCreateRequestDto;
 use App\Products\Services\Contracts\ProductCreateInterface;
 use App\Products\Services\Contracts\ProductGetAllInterface;
 use App\Products\Services\Contracts\ProductShowInterface;
+use App\Products\Services\Contracts\ProductUpdateInterface;
 use App\Shared\Http\Request;
 use App\Shared\Http\Response;
 class ProductController
@@ -35,6 +36,18 @@ class ProductController
         $productResponseDto = $productCreate->execute($productRequestDto);
 
         return Response::json(['data' => $productResponseDto], 201);
+
+    }
+    public function update(int $id, Request $request, ProductUpdateInterface $productUpdate): Response
+    {
+
+        $data = $request->getParameters();
+
+        $productRequestDto = ProductCreateRequestDto::fromArray((array)$data);
+
+        $productResponseDto = $productUpdate->execute($id, $productRequestDto);
+
+        return Response::json(['data' => $productResponseDto], 200);
 
     }
 }

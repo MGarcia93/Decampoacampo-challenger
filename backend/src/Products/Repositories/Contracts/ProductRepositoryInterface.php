@@ -7,6 +7,6 @@ interface ProductRepositoryInterface{
     public function getAll(): array;
     public function getById(int $id): ?Product;
     public function create(ProductCreateRequestDto $data): ?Product;
-    public function update(int $id, array $data): bool;
+    public function update(int $id, ProductCreateRequestDto $data): bool;
     public function delete(int $id): bool;
 }
