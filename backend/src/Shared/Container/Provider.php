@@ -10,5 +10,8 @@ use App\Shared\Convert\ConvertPriceToDolar;
 
 final class Provider{
     const BINDINGS = [
+      ProductGetAllInterface::class=> ProductGetAll::class,
+      ProductRepositoryInterface::class=> ProductRepository::class,
+      ConvertPriceInterface::class=> ConvertPriceToDolar::class
     ];
 }
