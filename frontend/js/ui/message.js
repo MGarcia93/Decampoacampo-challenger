@@ -6,9 +6,9 @@ class message{
         const messageDialogTitle = document.getElementById('message-dialog-title');
         const messageDialogMessage = document.getElementById('message-dialog-message');
         const messageDialogCloseButton = document.getElementById('btn-close-message');
-        messageDialogCloseButton.addEventListener('click', () => {
+        messageDialogCloseButton.onclick = () => {
             messageDialog.close();
-        });
+        };
         messageDialogTitle.textContent = type === 'error' ? 'Error' : 'Mensaje';
         messageDialogMessage.textContent = message;
         messageDialog.showModal();
