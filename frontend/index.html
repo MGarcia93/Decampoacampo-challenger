@@ -10,7 +10,14 @@
   <body>
     <header>
       <h1>Lista Producto</h1>
-      <button id="btn-add-product">+ Agregar Producto</button>
+      <button class="btn" id="btn-add-product">
+        <img
+          src="./assets/icons/plus-small.svg"
+          class="icon"
+          alt="Agregar Producto"
+        />
+        Agregar Producto
+      </button>
     </header>
     <main>
       <table id="product-table">
@@ -32,49 +39,57 @@
         <td class="product-description" data-name="description"></td>
         <td class="product-price" data-name="price"></td>
         <td class="product-price-usd" data-name="price_usd"></td>
-        <td>
-          <button class="btn-edit">Editar</button>
-          <button class="btn-delete">Eliminar</button>
+        <td class="product-actions">
+          <button class="btn btn-edit">
+            <img src="./assets/icons/pencil.svg" class="icon" alt="Editar Producto" />
+            Editar
+          </button>
+          <button class="btn btn-delete">
+            <img
+              src="./assets/icons/trash.svg"
+              class="icon"
+              alt="Eliminar Producto"
+            />
+            Eliminar
+          </button>
         </td>
       </tr>
     </template>
     <dialog id="product-dialog">
-        <h2 id="dialog-title"></h2>
-        <form id="product-form">
-            <div class="form-group">
-                <input type="hidden" id="product-id" />
-                <label for="product-name">Nombre:</label>
-                <input type="text" id="product-name" required />
-            </div>
-            <div class="form-group">
-                <label for="product-description">Descripción:</label>
-                <textarea id="product-description" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="product-price">Precio:</label>
-                <input type="number" id="product-price" step="0.01" required />
-            </div>
-            
-        </form>   
-        <footer>
-            <button type="button" id="btn-cancel-product">Cancelar</button>
-            <button type="button" id="btn-save-product">Guardar</button>
-        </footer>    
+      <h2 id="product-dialog-title"></h2>
+      <form id="product-form">
+        <div class="form-group">
+          <label for="product-name">Nombre:</label>
+          <input type="text" id="product-name" required />
+        </div>
+        <div class="form-group">
+          <label for="product-description">Descripción:</label>
+          <textarea id="product-description" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="product-price">Precio:</label>
+          <input type="number" id="product-price" step="0.01" required />
+        </div>
+      </form>
+      <footer>
+        <button type="button" class="btn" id="btn-cancel-product">Cancelar</button>
+        <button type="button" class="btn btn-success" id="btn-save-product">Guardar</button>
+      </footer>
     </dialog>
     <dialog id="confirm-dialog">
-        <h2>Confirmar Eliminación</h2>
-        <p>¿Estás seguro de que deseas eliminar este producto?</p>
-        <footer>
-            <button type="button" id="btn-cancel-delete">Cancelar</button>
-            <button type="button" id="btn-confirm-delete">Eliminar</button>
-        </footer>
+      <h2>Confirmar Eliminación</h2>
+      <p>¿Estás seguro de que deseas eliminar este producto?</p>
+      <footer>
+        <button type="button" class="btn" id="btn-cancel-delete">Cancelar</button>
+        <button type="button" class="btn btn-success" id="btn-confirm-delete">Eliminar</button>
+      </footer>
     </dialog>
     <dialog id="message-dialog">
-        <h2 id="message-dialog-title">Error</h2>
-        <p id="message-dialog-message"></p>
-        <footer>
-            <button type="button" id="btn-close-message">Cerrar</button>
-        </footer>
+      <h2 id="message-dialog-title">Error</h2>
+      <p id="message-dialog-message"></p>
+      <footer>
+        <button type="button" class="btn" id="btn-close-message">Cerrar</button>
+      </footer>
     </dialog>
     <script type="module" src="./js/main.js"></script>
   </body>

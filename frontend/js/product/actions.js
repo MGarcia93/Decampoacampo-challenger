@@ -47,6 +47,8 @@ export default class actionsProduct {
     showForm() {
         const formDialog = document.getElementById('product-dialog');
         formDialog.showModal();
+        const title = document.getElementById('product-dialog-title');
+        title.textContent = this.product ? 'Editar Producto' : 'Agregar Producto';
         if(this.product){
             const form = document.getElementById('product-form');
             form.elements['product-name'].value = this.product.nombre;

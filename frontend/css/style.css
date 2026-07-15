@@ -1,0 +1,175 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  color: #111827;
+  background: #f3f4f6;
+  padding: 0 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d7dce3;
+  color: #4b5563;
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
+
+  .icon {
+    width: 1rem;
+    height: auto;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+
+  .btn {
+    background-color: #3b6df6;
+    border-color: #1b488f4d;
+    color: #fff;
+
+    &:hover {
+      background-color: #1b488f;
+    }
+
+    .icon {
+      width: 1.5rem;
+    }
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+
+  thead {
+    text-align: left;
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #e5e7eb;
+
+      .product-actions {
+        display: flex;
+        gap: 0.5rem;
+        max-width: 6rem;
+
+        .btn-edit {
+          background-color: #f6b866;
+          border: 1px solid #e6a24b;
+          color: #313131;
+
+          &:hover {
+            background-color: #eeaa4f;
+          }
+        }
+
+        .btn-delete {
+          background-color: #d9534f;
+          border: 1px solid #bd3f3b;
+          color: #fff;
+
+          &:hover {
+            background-color: #bd3f3b;
+          }
+        }
+      }
+    }
+  }
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  label {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    padding: 0.5rem;
+    border-radius: 3px;
+    border: 1px solid #d7dce3;
+    font-size: 1rem;
+  }
+}
+dialog {
+  width: min(440px, 100%);
+  &[open] {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem 0;
+    gap: 0.5rem;
+    .btn-success {
+      background-color: #3b6df6;
+      border-color: #1b488f4d;
+      color: #fff;
+
+      &:hover {
+        background-color: #1b488f;
+      }
+    }
+  }
+}
+#product-dialog {
+  height: 100%;
+  max-height: none;
+  margin: 0 0 0 auto;
+  padding: 1rem;
+  border: 0;
+  &[open] {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    animation: offsetFadeIn 0.3s ease-in-out;
+  }
+
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes offsetFadeIn {
+  from {
+    
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
