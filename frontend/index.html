@@ -41,7 +41,11 @@
         <td class="product-price-usd" data-name="price_usd"></td>
         <td class="product-actions">
           <button class="btn btn-edit">
-            <img src="./assets/icons/pencil.svg" class="icon" alt="Editar Producto" />
+            <img
+              src="./assets/icons/pencil.svg"
+              class="icon"
+              alt="Editar Producto"
+            />
             Editar
           </button>
           <button class="btn btn-delete">
@@ -57,31 +61,50 @@
     </template>
     <dialog id="product-dialog">
       <h2 id="product-dialog-title"></h2>
-      <form id="product-form">
+      <form id="product-form" novalidate>
         <div class="form-group">
           <label for="product-name">Nombre:</label>
           <input type="text" id="product-name" required />
+          <small id="product-name-error" class="error-message"></small>
         </div>
+
         <div class="form-group">
           <label for="product-description">Descripción:</label>
           <textarea id="product-description" required></textarea>
+          <small id="product-description-error" class="error-message"></small>
         </div>
+
         <div class="form-group">
           <label for="product-price">Precio:</label>
-          <input type="number" id="product-price" step="0.01" required />
+          <input
+            type="number"
+            id="product-price"
+            step="0.01"
+            min="0.01"
+            required
+          />
+          <small id="product-price-error" class="error-message"></small>
         </div>
       </form>
       <footer>
-        <button type="button" class="btn" id="btn-cancel-product">Cancelar</button>
-        <button type="button" class="btn btn-success" id="btn-save-product">Guardar</button>
+        <button type="button" class="btn" id="btn-cancel-product">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-success" id="btn-save-product">
+          Guardar
+        </button>
       </footer>
     </dialog>
     <dialog id="confirm-dialog">
       <h2>Confirmar Eliminación</h2>
       <p>¿Estás seguro de que deseas eliminar este producto?</p>
       <footer>
-        <button type="button" class="btn" id="btn-cancel-delete">Cancelar</button>
-        <button type="button" class="btn btn-success" id="btn-confirm-delete">Eliminar</button>
+        <button type="button" class="btn" id="btn-cancel-delete">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-success" id="btn-confirm-delete">
+          Eliminar
+        </button>
       </footer>
     </dialog>
     <dialog id="message-dialog">

@@ -121,6 +121,14 @@ table {
     border: 1px solid #d7dce3;
     font-size: 1rem;
   }
+
+  .error-message {
+    display: none;
+    margin-top: 0.35rem;
+    color: #c0392b;
+    font-size: 0.85rem;
+  }
+
 }
 dialog {
   width: min(440px, 100%);
@@ -154,7 +162,6 @@ dialog {
     grid-template-rows: auto 1fr auto;
     animation: offsetFadeIn 0.3s ease-in-out;
   }
-
 }
 @keyframes fadeIn {
   from {
@@ -166,7 +173,6 @@ dialog {
 }
 @keyframes offsetFadeIn {
   from {
-    
     transform: translateX(100%);
   }
   to {
