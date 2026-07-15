@@ -2,7 +2,6 @@ import * as api from '../api.js';
 
 export default class ProductService {
     async createProduct(product) {
-        this.validateProduct(product);
 
         const response = await api.createProduct(product);
 
@@ -61,31 +60,6 @@ export default class ProductService {
         }
     }
 
-    validateProduct(product) {
-        if (!product || typeof product !== 'object') {
-            throw new Error('Los datos del producto no son válidos');
-        }
-
-        if (
-            typeof product.nombre !== 'string' ||
-            product.nombre.trim() === ''
-        ) {
-            throw new Error('El nombre del producto es obligatorio');
-        }
-
-        if (
-            typeof product.descripcion !== 'string' ||
-            product.descripcion.trim() === ''
-        ) {
-            throw new Error('La descripción del producto es obligatoria');
-        }
-
-        const price = Number(product.precio);
-
-        if (!Number.isFinite(price) || price <= 0) {
-            throw new Error('El precio debe ser mayor a cero');
-        }
-    }
 
     getProductFromResponse(response, errorMessage) {
         if (!response?.data || typeof response.data !== 'object') {
