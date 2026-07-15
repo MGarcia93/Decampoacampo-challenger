@@ -10,16 +10,24 @@ class ProductCreateRequestDto{
     ){}
 
     public static function fromArray(array $data): self{
+        $errorMessages = [];
         if (empty($data['nombre'])) {
-            throw new ValidateException("El nombre del producto es obligatorio");
+            $errorMessages['nombre'] = "El nombre del producto es obligatorio";
         }
         if (empty($data['descripcion'])) {
-            throw new ValidateException("La descripción del producto es obligatoria");
+            $errorMessages['descripcion'] = "La descripción del producto es obligatoria";
         }
-    
-        if (empty($data['precio']) || !is_numeric($data['precio']) || $data['precio'] <= 0) {
-            throw new ValidateException("El precio del producto debe ser mayor a cero");
+        if(empty($data['precio']) ) {
+            $errorMessages['precio'] = "El precio del producto es obligatorio";
+        }else if ( !is_numeric($data['precio']) ) {
+            $errorMessages['precio'] = "El precio del producto debe ser un número";
+        }else if ( $data['precio'] <= 0 ) {
+            $errorMessages['precio'] = "El precio del producto debe ser mayor a cero";
         }
+        if (!empty($errorMessages)) {
+            throw new ValidateException(json_encode($errorMessages));
+        }
+
         return new self(
             nombre: $data['nombre'],
             descripcion: $data['descripcion'],

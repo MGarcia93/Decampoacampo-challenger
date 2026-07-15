@@ -9,7 +9,7 @@ class App
 {
     public function run()
     {
-        try{
+        try {
 
             $router = new Router();
             $container = new Container();
@@ -26,27 +26,32 @@ class App
             if (!class_exists($controllerClass)) {
                 $this->error("Clase de controlador $controllerClass no encontrada.", 500);
             }
-            $controller =   $container->dispatch($controllerClass);
+            $controller = $container->dispatch($controllerClass);
             if (!method_exists($controller, $actionMethod)) {
                 $this->error("Método $actionMethod no encontrado en la clase de controlador $controllerClass.", 500);
             }
-            $response=$container->call($controller, $actionMethod, $route->parameters);
+            $response = $container->call($controller, $actionMethod, $route->parameters);
             $response->send();
-        }catch (HttpException $e) {
+        } catch (HttpException $e) {
             $this->error($e->getMessage(), $e->getStatusCode());
-        }catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             $this->error($e->getMessage(), 500);
         }
-       
-        
+
+
 
 
 
     }
     public function error(string $message, int $statusCode = 500): void
     {
-        Response::json(['error' => $message, 'code' => $statusCode], $statusCode)->send();
-        
+        $decodedMessage = json_decode($message, true);
+
+        $error = json_last_error() === JSON_ERROR_NONE
+            ? $decodedMessage
+            : $message;
+        Response::json(['error' => $error, 'code' => $statusCode], $statusCode)->send();
+
         die();
     }
 }
