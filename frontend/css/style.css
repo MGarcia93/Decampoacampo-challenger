@@ -79,7 +79,7 @@ table {
       .product-actions {
         display: flex;
         gap: 0.5rem;
-        max-width: 6rem;
+        max-width: 8rem;
 
         .btn-edit {
           background-color: #f6b866;
